@@ -6,7 +6,7 @@
 /*   By: bmelo <bmelo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/14 07:14:58 by bmelo             #+#    #+#             */
-/*   Updated: 2026/11/14 07:22:13 by bmelo            ###   ########.fr       */
+/*   Updated: 2026/11/14 21:52:11 by bmelo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
-
-Base* generate(void);
-void identify(Base* p);
-void identify(Base& p);
 
 int main()
 {
