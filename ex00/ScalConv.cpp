@@ -45,14 +45,22 @@ void ScalConv::convert(const std::string &literal)
     }
     try
     {
+        if (literal.empty())
+                throw std::runtime_error("Invalid format");
+        if (std::isspace(static_cast<unsigned char>(literal[0])))
+                throw std::runtime_error("Invalid format");
         double value = 0.0;
-        if (literal.length() == 1 && !std::isdigit(literal[0]))
+        if (literal.length() == 1 && !std::isdigit(static_cast<unsigned char>(literal[0])) && std::isprint(static_cast<unsigned char>(literal[0])))
                 value = static_cast<double>(literal[0]);
         else
         {
                 std::string cleanLiteral = literal;
                 if (literal[literal.length() - 1] == 'f' && literal != "f" && literal != "-f" && literal != "+f")
+                {
+                        if (literal.find('.') == std::string::npos)
+                                throw std::runtime_error("Invalid float literal");
                         cleanLiteral = literal.substr(0, literal.length() - 1);
+                }
                 std::stringstream ss(cleanLiteral);
                 ss.exceptions(std::ios::failbit | std::ios::badbit);
                 ss >> value;
@@ -72,12 +80,13 @@ void ScalConv::convert(const std::string &literal)
                 std::cout << "impossible\n";
         else
                 std::cout << static_cast<int>(value) << "\n";
+        float f = static_cast<float>(value);
         std::cout << "float : " << static_cast<float>(value);
-        if (value == static_cast<float>(value) && value < 1000000 && value > -1000000)
+        if (value == static_cast<long>(f) && f < 1000000 && f > -1000000)
                 std::cout << ".0";
         std::cout << "f\n";
         std::cout << "double : " << value;
-        if (value == static_cast<double>(value) && value < 1000000 && value > -1000000)
+        if (value == static_cast<long>(f) && f < 1000000 && f > -1000000)
                 std::cout << ".0";
         std::cout << "\n";
     }
